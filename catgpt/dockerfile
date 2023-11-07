@@ -19,6 +19,10 @@ RUN CGO_ENABLED=0 go build -o main
 # And, finally, runtime images
 FROM gcr.io/distroless/static-debian12:latest-amd64
 
+# take App Version from VERSION file in directory of project
+ARG APP_VERSION
+ENV APP_VERSION=$APP_VERSION
+
 # Copied from image above our MAIN file to DIR
 COPY --from=build /app/main /catgpt/
 
