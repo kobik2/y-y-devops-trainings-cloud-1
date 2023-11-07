@@ -37,5 +37,6 @@ jobs:
         docker buildx create --use
         docker buildx build -t catgpt cr.yandex/${{ secrets.YA_REGISTRY }}/gptcat:$APP_VERSION -f ./catgpt/Dockerfile ./catgpt
         docker push cr.yandex/${{ secrets.YA_REGISTRY }}/gptcat:$APP_VERSION
+        shell: /usr/bin/bash -e {0}
       env:
         APP_VERSION: ${{ env.APP_VERSION }}
