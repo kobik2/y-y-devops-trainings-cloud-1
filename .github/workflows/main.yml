@@ -24,15 +24,15 @@ jobs:
 
     - name: Login to Yandex Container Registry
       run: |
-        docker login -u ${{ secrets.YCR_USERNAME }} -p ${{ secrets.YCR_PASSWORD }} registry.yandexcloud.net
+        docker login -u ${{ secrets.YA_USERNAME }} -p ${{ secrets.YA_PASSWORD }} cr.yandex
       env:
-        YCR_USERNAME: ${{ secrets.YCR_USERNAME }}
-        YCR_PASSWORD: ${{ secrets.YCR_PASSWORD }}
+        YCR_USERNAME: ${{ secrets.YA_USERNAME }}
+        YCR_PASSWORD: ${{ secrets.YA_PASSWORD }}
 
     - name: Build and push Docker image
       run: |
         docker buildx create --use
-        docker buildx build -t registry.yandexcloud.net/${{ github.repository }}:$APP_VERSION -f Dockerfile.build .
-        docker push registry.yandexcloud.net/${{ github.repository }}:$APP_VERSION
+        docker buildx build -t cr.yandex/${{ YA_REGISTRY }}/gptcat:$APP_VERSION -f Dockerfile.build .
+        docker push cr.yandex/${{ YA_REGISTRY }}/gptcat:$APP_VERSION
       env:
         APP_VERSION: ${{ env.APP_VERSION }}
