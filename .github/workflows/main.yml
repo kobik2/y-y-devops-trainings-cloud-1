@@ -24,10 +24,13 @@ jobs:
 
     - name: Login to Yandex Container Registry
       run: |
-        docker login -u ${{ secrets.YA_USERNAME }} -p ${{ secrets.YA_PASSWORD }} cr.yandex
+        docker login \
+        --username ${{ secrets.YA_USERNAME }} \
+        --password ${{ secrets.YA_PASS }} \
+        cr.yandex
       env:
-        YCR_USERNAME: ${{ secrets.YA_USERNAME }}
-        YCR_PASSWORD: ${{ secrets.YA_PASSWORD }}
+        YA_USERNAME: ${{ secrets.YA_USERNAME }}
+        YA_PASSWORD: ${{ secrets.YA_PASSWORD }}
 
     - name: Build and push Docker image
       run: |
