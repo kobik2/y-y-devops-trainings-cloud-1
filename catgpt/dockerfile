@@ -1,21 +1,29 @@
+# based threath on golang
 FROM golang:1.21 As build
 
+# create work folder
 WORKDIR /app
 
+# Copy dependencies and they hesh
 COPY go.mod go.sum ./
 
+# Download this dependencies locally
 RUN go mod download
 
+# Copied project to container
 COPY . .
 
-RUN ls -la
+# build our app to MAIN
 RUN CGO_ENABLED=0 go build -o main
-RUN ls -la
 
+# And, finally, runtime images
 FROM gcr.io/distroless/static-debian12:latest-amd64
 
+# Copied from image above our MAIN file to DIR
 COPY --from=build /app/main /catgpt/
 
+# work directory with our app
 WORKDIR /catgpt
 
+# Finally finally=) start our app!
 CMD [ "./main" ]
