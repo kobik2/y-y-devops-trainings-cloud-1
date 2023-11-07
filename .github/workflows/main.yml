@@ -18,7 +18,7 @@ jobs:
 
     - name: Read version from VERSION file
       run: |
-        export APP_VERSION=$(cat VERSION)
+        export APP_VERSION=$(cat ./catgpt/VERSION)
         echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
       shell: bash
 
