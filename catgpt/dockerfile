@@ -1,0 +1,21 @@
+FROM golang:1.21 As build
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY . .
+
+RUN ls -la
+RUN CGO_ENABLED=0 go build -o main
+RUN ls -la
+
+FROM gcr.io/distroless/static-debian12:latest-amd64
+
+COPY --from=build /app/main /catgpt/
+
+WORKDIR /catgpt
+
+CMD [ "./main" ]
