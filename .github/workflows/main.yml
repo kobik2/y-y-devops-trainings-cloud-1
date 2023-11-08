@@ -31,7 +31,8 @@ jobs:
       env:
         YA_USERNAME: ${{ secrets.YA_USERNAME }}
         YA_PASSWORD: ${{ secrets.YA_PASSWORD }}
-
+    - name: List files
+      run: ls -la
     - name: Build and push Docker image
       run: |
         shell: /usr/bin/bash ls -la
