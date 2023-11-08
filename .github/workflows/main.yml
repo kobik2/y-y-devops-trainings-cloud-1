@@ -37,5 +37,7 @@ jobs:
       run: |
         docker buildx create --use
         docker buildx build --no-cache --push -t cr.yandex/${{ secrets.YA_REGISTRY }}/gptcat:"$APP_VERSION" -f catgpt/dockerfile catgpt/
+    - name: List files
+      run: ls -la ./catgpt
       env:
         APP_VERSION: ${{ env.APP_VERSION }}
