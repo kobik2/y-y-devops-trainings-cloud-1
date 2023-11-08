@@ -35,7 +35,6 @@ jobs:
       run: ls -la ./catgpt
     - name: Build and push Docker image
       run: |
-        provenance: false
         docker buildx create --use
         docker buildx build --no-cache --push -t cr.yandex/${{ secrets.YA_REGISTRY }}/gptcat:$APP_VERSION -f catgpt/dockerfile catgpt/
       env:
