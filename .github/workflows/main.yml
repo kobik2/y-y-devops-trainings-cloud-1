@@ -36,7 +36,6 @@ jobs:
     - name: Build and push Docker image
       run: |
         docker buildx create --use
-        docker buildx build --no-cache -t cr.yandex/${{ secrets.YA_REGISTRY }}/gptcat:$APP_VERSION -f catgpt/dockerfile catgpt/ \
-        --push cr.yandex/${{ secrets.YA_REGISTRY }}/gptcat:$APP_VERSION
+        docker buildx build --no-cache --push -t cr.yandex/${{ secrets.YA_REGISTRY }}/gptcat:$APP_VERSION -f catgpt/dockerfile catgpt/
       env:
         APP_VERSION: ${{ env.APP_VERSION }}
