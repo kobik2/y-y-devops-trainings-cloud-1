@@ -29,5 +29,8 @@ COPY --from=build /app/main /catgpt/
 # work directory with our app
 WORKDIR /catgpt
 
+# forward port to 9090
+EXPOSE 8080 9090
+
 # Finally finally=) start our app!
 CMD [ "./main" ]
